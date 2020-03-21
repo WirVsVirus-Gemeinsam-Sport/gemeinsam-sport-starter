@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  backend:
+    image: docker.pkg.github.com/wirvsvirus-gemeinsam-sport/gemeinsam-sport-backend/backend:latest
+    networks:
+      - wvv
+  frontend:
+    image: docker.pkg.github.com/wirvsvirus-gemeinsam-sport/gemeinsam-sport-frontend/frontend:latest
+    depends_on:
+      - backend
+    ports:
+      - "80:4000"
+    networks:
+      - wvv
+    environment:
+      PORT: 4000
+      SECRET_KEY_BASE: "0d030d6854f0887f3abc3b14ee8db731b054fa8312071534eec811e57f6128f7"
+
+networks:
+  wvv:
+    driver: bridge
